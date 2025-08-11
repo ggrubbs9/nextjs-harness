@@ -37,12 +37,7 @@ pipeline:
                   identifier: GoInstallBuildTest
                   spec:
                     shell: Sh
-                    command: npm i
+                    command: |-
+                      npm i
+                      npm test
                   description: Run install, build, test tasks
-              - step:
-                  type: Run
-                  name: Run tests
-                  identifier: Run_tests
-                  spec:
-                    shell: Sh
-                    command: npm run test

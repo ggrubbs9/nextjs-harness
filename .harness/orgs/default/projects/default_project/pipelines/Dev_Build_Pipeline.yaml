@@ -38,3 +38,5 @@ pipeline:
                     shell: Sh
                     command: echo 'commands go here'
                   description: Run install, build, test tasks
+  delegateSelectors:
+    - helm-delegate

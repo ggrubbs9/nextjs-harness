@@ -32,11 +32,11 @@ pipeline:
             steps:
               - step:
                   type: Run
-                  name: GoInstallBuildTest
+                  name: Install
                   identifier: GoInstallBuildTest
                   spec:
                     shell: Sh
-                    command: echo 'commands go here'
+                    command: npm i
                   description: Run install, build, test tasks
               - step:
                   type: Run

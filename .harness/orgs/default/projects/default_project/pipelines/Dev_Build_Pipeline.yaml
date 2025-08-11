@@ -38,6 +38,7 @@ pipeline:
                   spec:
                     shell: Sh
                     command: |-
+                      ls
                       npm i
                       npm test
                   description: Run install, build, test tasks

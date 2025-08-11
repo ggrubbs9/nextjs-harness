@@ -1,0 +1,40 @@
+pipeline:
+  name: Dev Build Pipeline
+  identifier: Dev_Build_Pipeline
+  projectIdentifier: default_project
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: git_connector
+        build: <+input>
+  stages:
+    - stage:
+        name: build
+        identifier: build
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          caching:
+            enabled: true
+            override: true
+          buildIntelligence:
+            enabled: true
+          platform:
+            os: MacOS
+            arch: Arm64
+          runtime:
+            type: Docker
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: GoInstallBuildTest
+                  identifier: GoInstallBuildTest
+                  spec:
+                    shell: Sh
+                    command: echo 'commands go here'
+                  description: Run install, build, test tasks

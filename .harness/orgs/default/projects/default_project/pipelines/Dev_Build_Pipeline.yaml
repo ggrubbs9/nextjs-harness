@@ -45,4 +45,4 @@ pipeline:
                   identifier: Test
                   spec:
                     shell: Sh
-                    command: npm test
+                    command: npm run test

@@ -38,3 +38,20 @@ pipeline:
                     shell: Sh
                     command: echo 'commands go here'
                   description: Run install, build, test tasks
+              - step:
+                  type: Run
+                  name: Run tests
+                  identifier: Run_tests
+                  spec:
+                    shell: Sh
+                    command: |-
+                      - step:
+                                        type: Run
+                                        name: run pytest # Specify a name for the step.
+                                        identifier: run_pytest # Define a step ID, usually based on the name.
+                                        spec:
+                                          connectorRef: YOUR_IMAGE_REGISTRY_CONNECTOR 
+                                          image: python:latest # Specify an image, if required.
+                                          shell: Sh
+                                          command: |- # Provide your commands
+                                            pytest test_main.py --junit-xml=output-test.xml

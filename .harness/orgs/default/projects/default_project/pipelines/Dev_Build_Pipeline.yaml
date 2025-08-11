@@ -18,25 +18,41 @@ pipeline:
         spec:
           cloneCodebase: true
           caching:
-            enabled: true
+            enabled: false
             override: true
+            paths: []
           buildIntelligence:
-            enabled: true
+            enabled: false
           platform:
-            os: MacOS
+            os: Linux
             arch: Arm64
           runtime:
-            type: Docker
+            type: Cloud
             spec: {}
           execution:
             steps:
               - step:
                   type: Run
-                  name: GoInstallBuildTest
+                  name: Install
                   identifier: GoInstallBuildTest
                   spec:
                     shell: Sh
-                    command: echo 'commands go here'
+                    command: npm i
                   description: Run install, build, test tasks
-  delegateSelectors:
-    - helm-delegate
+              - step:
+                  type: Run
+                  name: Run tests
+                  identifier: Run_tests
+                  spec:
+                    shell: Sh
+                    command: |-
+                      - step:
+                                        type: Run
+                                        name: run pytest # Specify a name for the step.
+                                        identifier: run_pytest # Define a step ID, usually based on the name.
+                                        spec:
+                                          connectorRef: YOUR_IMAGE_REGISTRY_CONNECTOR 
+                                          image: python:latest # Specify an image, if required.
+                                          shell: Sh
+                                          command: |- # Provide your commands
+                                            pytest test_main.py --junit-xml=output-test.xml
